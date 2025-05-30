@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>HOLLYWOOD HACKER</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: #00FF00;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+
+    #terminal {
+      padding: 20px;
+      height: 100vh;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    #startBtn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 20px;
+      cursor: pointer;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
+
+    .fbi-alert {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255,0,0,0.9);
+      color: white;
+      font-size: 60px;
+      font-weight: bold;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      animation: flash 0.4s infinite alternate;
+      z-index: 9999;
+    }
+
+    @keyframes flash {
+      from {opacity: 1;}
+      to {opacity: 0;}
+    }
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      25% { transform: translate(-2px, -1px) rotate(-1deg); }
+      50% { transform: translate(-1px, 2px) rotate(1deg); }
+      75% { transform: translate(2px, 1px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+
+    .shake {
+      animation: shake 0.1s infinite;
+    }
+
+    #inputPrompt {
+      display: none;
+      margin-top: 20px;
+      padding-left: 20px;
+    }
+
+    input {
+      background: black;
+      color: #00FF00;
+      border: none;
+      font-size: 18px;
+      outline: none;
+      font-family: inherit;
+      width: 300px;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 20px;
+      background-color: lime;
+      margin-top: 10px;
+      transition: width 0.2s;
+    }
+
+    .progress-container {
+      width: 100%;
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<button id="startBtn">Ne clique pas ici</button>
+
+<div id="inputPrompt">
+  <span style="color:#00FF00;padding-left:20px;">$</span> <input id="userInput" autocomplete="off" />
+</div>
+
+<div id="terminal"></div>
+
+<div class="fbi-alert" id="fbiAlert">💥 FBI SYSTEM BREACH 💥</div>
+
+   <!-- Audio clavier -->
+   <audio id="keySound" src="C:\Users\seela\Documents\PORTFOLIO\html\zapsplat_emergency_siren_beep_warning_nuclear_meltdown_84854.mp3" preload="auto"></audio>
+
+<script>
+  const startBtn = document.getElementById('startBtn');
+  const inputPrompt = document.getElementById('inputPrompt');
+  const userInput = document.getElementById('userInput');
+  const terminal = document.getElementById('terminal');
+  const fbiAlert = document.getElementById('fbiAlert');
+  const keySound = document.getElementById('keySound');
+
+  const lines = [
+    "Connexion au serveur...",
+    "Authentification...",
+    "Accès root obtenu.",
+    "Chargement des outils...",
+    "Injection de paquets réseau...",
+    "Scan du réseau distant...",
+    "192.168.0.23 - vulnérable",
+    "Téléchargement des données...",
+    "Fichier trouvé: secrets.pdf",
+    "Création de tunnel chiffré...",
+    "Évasion en cours...",
+    "Détection du FBI...",
+    "LANCEMENT DU MODE ÉVASION ⚠️"
+  ];
+
+  const hollywoodStream = () => {
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < lines.length) {
+        const line = document.createElement('div');
+        line.textContent = lines[i];
+        terminal.appendChild(line);
+        keySound.currentTime = 0;
+        keySound.play();
+        terminal.scrollTop = terminal.scrollHeight;
+        i++;
+      } else {
+        clearInterval(interval);
+        fakeDownload();
+      }
+    }, 500);
+  };
+
+  const fakeDownload = () => {
+    const msg = document.createElement('div');
+    msg.textContent = "Téléchargement de fichiers confidentiels...";
+    terminal.appendChild(msg);
+
+    const container = document.createElement('div');
+    container.className = 'progress-container';
+
+    const bar = document.createElement('div');
+    bar.className = 'progress-bar';
+    container.appendChild(bar);
+    terminal.appendChild(container);
+
+    let width = 0;
+    const progressInterval = setInterval(() => {
+      width += Math.random() * 10;
+      if (width >= 100) {
+        width = 100;
+        clearInterval(progressInterval);
+        terminal.appendChild(document.createElement('br'));
+        loopMatrix();
+      }
+      bar.style.width = width + "%";
+    }, 200);
+  };
+
+  const loopMatrix = () => {
+    let count = 0;
+    const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&+=/\\|";
+    const interval = setInterval(() => {
+      const line = document.createElement('div');
+      line.textContent = Array.from({length: 70}, () => symbols[Math.floor(Math.random()*symbols.length)]).join('');
+      terminal.appendChild(line);
+      keySound.currentTime = 0;
+      keySound.play();
+      terminal.scrollTop = terminal.scrollHeight;
+      count++;
+      if (count > 50) clearInterval(interval);
+    }, 100);
+  };
+
+  const startCountdown = (callback) => {
+    let countdown = 3;
+    const display = document.createElement('div');
+    display.style.fontSize = '60px';
+    display.style.color = 'red';
+    display.style.textAlign = 'center';
+    terminal.appendChild(display);
+
+    const interval = setInterval(() => {
+      display.textContent = `⚠️ ${countdown}...`;
+      countdown--;
+      if (countdown < 0) {
+        clearInterval(interval);
+        display.remove();
+        callback();
+      }
+    }, 1000);
+  };
+
+  startBtn.addEventListener('click', () => {
+    startBtn.style.display = 'none';
+    inputPrompt.style.display = 'block';
+    const msg = document.createElement('div');
+    msg.textContent = "Écris 'hollywood' afin d’accéder aux données.";
+    terminal.appendChild(msg);
+  });
+
+  userInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const val = userInput.value.trim().toLowerCase();
+      if (val === 'hollywood') {
+        inputPrompt.style.display = 'none';
+        startCountdown(() => {
+          document.body.classList.add('shake');
+          fbiAlert.style.display = 'flex';
+          hollywoodStream();
+        });
+      } else {
+        const error = document.createElement('div');
+        error.textContent = `Commande non reconnue : ${val}`;
+        terminal.appendChild(error);
+      }
+      userInput.value = '';
+    }
+  });
+</script>
+
+</body>
+</html>
